@@ -33,7 +33,8 @@
         "symfony/yaml": "5.2.*"
     },
     "require-dev": {
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "symfony/maker-bundle": "^1.30"
     },
     "config": {
         "platform": {

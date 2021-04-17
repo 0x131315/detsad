@@ -1,6 +1,8 @@
 {
+    "name": "learn/detsad",
+    "description": "Демонстрационный проект информационной системы для детского сада",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {

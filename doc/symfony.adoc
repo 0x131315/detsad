@@ -1,0 +1,65 @@
+= Команды Symfony
+:toc-title: Содержание:
+:toc:
+:icons: font
+:source-highlighter: highlight.js
+:collapsible:
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+== Entity
+
+=== User
+
+Создать:
+
+[source,bash]
+--
+php bin/console make:user
+--
+
+NOTE: нужно https://symfony.com/doc/current/security.html[настроить аутентификацию]
+
+Модифицировать:
+
+[source,bash]
+--
+php bin/console make:entity
+--
+
+NOTE: нужна миграция
+
+== Doctrine
+
+== Таблицы
+
+Создать схему
+
+[source,bash]
+--
+php bin/console doctrine:schema:create
+--
+
+=== Миграции
+
+Создать
+
+[source,bash]
+--
+php bin/console make:migration
+--
+
+=== Фикстуры
+
+Создать
+
+[source,bash]
+--
+php bin/console make:fixtures
+--
+
+Применить
+
+[source,bash]
+--
+php bin/console doctrine:fixtures:load --append --group=UserFixtures
+--

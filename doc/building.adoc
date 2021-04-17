@@ -1,0 +1,172 @@
+= Последовательность разработки
+:toc-title: Содержание:
+:toc:
+:icons: font
+:source-highlighter: highlight.js
+:collapsible:
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:docker_dir: ../docker
+:root_dir: ..
+:app_dir: ../app
+
+== Развернуть docker-окружение
+
+=== nginx
+
+.default.conf
+[%collapsible.result]
+====
+[source,nginx]
+--
+include::{docker_dir}/conf/nginx/detsad.conf[]
+--
+====
+
+.сервис
+[%collapsible.result]
+====
+[source,docker-compose]
+--
+include::{root_dir}/docker-compose.yml[lines=46..58]
+--
+====
+
+=== php
+
+.php.ini
+[%collapsible.result]
+====
+[source,nginx]
+--
+include::{docker_dir}/conf/php/php.ini[]
+--
+====
+
+.php.conf
+[%collapsible.result]
+====
+[source,nginx]
+--
+include::{docker_dir}/conf/php/php.conf[]
+--
+====
+
+.сервис
+[%collapsible.result]
+====
+[source,docker-compose]
+--
+include::{root_dir}/docker-compose.yml[lines=10..28]
+--
+====
+
+=== mysql
+
+.сервис
+[%collapsible.result]
+====
+[source,docker-compose]
+--
+include::{root_dir}/docker-compose.yml[lines=30..45]
+--
+====
+
+=== docker-compose
+
+.docker-compose.yml
+[%collapsible.result]
+====
+[source,docker-compose]
+--
+include::{root_dir}/docker-compose.yml[]
+--
+====
+
+== Добавить зависимости
+
+[source,bash]
+--
+composer create-project symfony/skeleton ./
+composer req api
+composer req maker --dev
+composer req orm-fixtures --dev
+composer req profiler --dev
+composer req phpunit/phpunit --dev
+composer req symfony/test-pack --dev
+composer req hautelook/alice-bundle --dev
+composer req symfony/http-client --dev
+composer req form
+composer req jwt-auth
+--
+
+== Прописать доступы к БД в .env
+
+== Создать сущность пользователя
+
+[source,bash]
+--
+php bin/console make:user
+--
+
+== Создать таблички в БД
+
+[source,bash]
+--
+php bin/console doctrine:schema:create
+--
+
+== Создать контроллер авторизации
+
+SecurityController
+
+[source,bash]
+--
+php bin/console make:auth
+--
+
+== Создать контроллер для главной
+
+HomeController
+
+[source,bash]
+--
+php bin/console make:controller
+--
+
+== Настроить маршрут для главной
+
+.HomeController
+[source,php]
+--
+include::{app_dir}/src/Controller/HomeController.php[lines=11..12]
+--
+
+== Настроить редирект на главную при авторизации
+
+.LoginFormAuthenticator
+[source,php]
+--
+include::{app_dir}/src/Security/LoginFormAuthenticator.php[lines=93..94]
+...
+include::{app_dir}/src/Security/LoginFormAuthenticator.php[lines=99]
+--
+
+== Создать фикстуру с админом
+
+[source,bash]
+--
+php bin/console make:fixtures
+--
+
+.UserFixtures
+[source,php]
+--
+include::{app_dir}/src/DataFixtures/UserFixtures.php[lines=19..29]
+--
+
+== Применить фикстуру с админом
+
+[source,bash]
+--
+php bin/console doctrine:fixtures:load --append --group=UserFixtures
+--

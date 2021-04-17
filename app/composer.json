@@ -38,7 +38,10 @@
         "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpunit/phpunit": "^9.5",
         "roave/security-advisories": "dev-latest",
+        "symfony/browser-kit": "^5.2",
+        "symfony/css-selector": "^5.2",
         "symfony/maker-bundle": "^1.30",
+        "symfony/phpunit-bridge": "^5.2",
         "symfony/stopwatch": "^5.2",
         "symfony/web-profiler-bundle": "^5.2"
     },

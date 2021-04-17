@@ -1,0 +1,62 @@
+version: '2.4'
+
+services:
+  composer:
+    image: composer
+    user: "1000:1000"
+    volumes:
+      - ./app:/app
+
+  php8.0-fpm:
+    build: docker/image/8.0fpm
+    restart: unless-stopped
+    cpu_shares: 100
+    user: "1000:1000"
+    environment:
+      - TZ=Europe/Moscow
+      - COMPOSE_PROJECT_NAME
+      - PHP_IDE_CONFIG=serverName=localhost #path mapping container<->host for php cli in xdebug, for phpstorm->php->servers
+    #ports:
+    #  - "127.0.0.1:9000:9000"
+    volumes:
+      - ./docker/conf/php/php.ini:/usr/local/etc/php/php.ini:ro
+      - ./docker/conf/php/php.conf:/usr/local/etc/php-fpm.d/zz-php.conf:ro
+      - ./log/xdebug:/var/lib/php/xdebug
+      - ./log/php:/var/log/php
+      - php_sessions:/var/lib/php/sessions
+      - php_data:/data
+      - ./app:/var/www/html
+
+  mysql-8:
+    image: mysql:8
+    restart: unless-stopped
+    cpu_shares: 100
+    environment:
+      TZ: Europe/Moscow
+      MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      MYSQL_USER: ${DATABASE_USER}
+      MYSQL_PASSWORD: ${DATABASE_PASSWORD}
+      MYSQL_DATABASE: ${DATABASE_NAME}
+    ports:
+      - "127.0.0.1:3306:3306"
+    volumes:
+      - ./docker/conf/mysql/def.cnf:/etc/mysql/conf.d/z0custom.cnf:ro
+      - mysql:/var/lib/mysql
+
+  nginx:
+    build: docker/image/nginx
+    restart: unless-stopped
+    cpu_shares: 100
+    environment:
+      - TZ=Europe/Moscow
+    ports:
+      - "0.0.0.0:80:80"
+    volumes:
+      - ./docker/conf/nginx:/etc/nginx/conf.d
+      - ./log/nginx:/var/log/nginx
+      - ./app:/var/www/html
+
+volumes:
+  mysql:
+  php_data:
+  php_sessions:

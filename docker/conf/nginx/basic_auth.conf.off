@@ -1,0 +1,2 @@
+auth_basic "Unauthorized";
+auth_basic_user_file /etc/nginx/conf.d/.htpasswd; #login:pwdhash[:comment], for pwdhash exec 'openssl passwd' add enter password

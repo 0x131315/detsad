@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+pwd=$(dirname "$(readlink -e "$0")")
+docker-compose --project-directory ${pwd} -f ${pwd}/docker-compose.yml exec -T nginx nginx -s reload

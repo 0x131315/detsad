@@ -149,3 +149,5 @@ make make_ssl_keys
 Описать /api, /api/login в security.yml
 
 Прописать маршрут в routes.yml
+
+Добавить JwtDecorator.php для вывода метода авторизации в swagger

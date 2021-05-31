@@ -142,3 +142,10 @@ php bin/console doctrine:fixtures:load --append --group=UserFixtures
 --
 make make_ssl_keys
 --
+
+== Настроить JWT
+По инструкции https://api-platform.com/docs/core/jwt/
+
+Описать /api, /api/login в security.yml
+
+Прописать маршрут в routes.yml

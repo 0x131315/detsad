@@ -23,7 +23,7 @@ services:
       - ./docker/conf/php/php.conf:/usr/local/etc/php-fpm.d/zz-php.conf:ro
       - ./log/xdebug:/var/lib/php/xdebug
       - ./log/php:/var/log/php
-      - php_sessions:/var/lib/php/sessions
+      - ./docker/sessions:/var/lib/php/sessions
       - php_data:/data
       - ./app:/var/www/html
 
@@ -59,4 +59,3 @@ services:
 volumes:
   mysql:
   php_data:
-  php_sessions:

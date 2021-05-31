@@ -53,6 +53,11 @@ service_stats: ## stat services
 service_clean: ## clean not used data
 	docker system prune -f
 
+symfony_list_commands:
+	./php bin/console list
+symfony_cache_clear:
+	./php bin/console cache:clear
+
 # git
 git_list_unmerged_branch:
 	@cd ../src && export TERM=xterm && git branch -r --no-merged

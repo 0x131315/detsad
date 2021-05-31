@@ -151,3 +151,6 @@ make make_ssl_keys
 Прописать маршрут в routes.yml
 
 Добавить JwtDecorator.php для вывода метода авторизации в swagger
+
+Вывести кнопку Authorize
+

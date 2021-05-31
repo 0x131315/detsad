@@ -35,6 +35,9 @@ service_restart: service_stop service_start ## restart services
 composer_install:
 	./composer install
 
+make_ssl_keys:
+	./make_ssl_key
+
 # info
 php_info: ## php settings
 	./php -i

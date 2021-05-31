@@ -115,42 +115,6 @@ php bin/console make:user
 php bin/console doctrine:schema:create
 --
 
-== Создать контроллер авторизации
-
-SecurityController
-
-[source,bash]
---
-php bin/console make:auth
---
-
-== Создать контроллер для главной
-
-HomeController
-
-[source,bash]
---
-php bin/console make:controller
---
-
-== Настроить маршрут для главной
-
-.HomeController
-[source,php]
---
-include::{app_dir}/src/Controller/HomeController.php[lines=11..12]
---
-
-== Настроить редирект на главную при авторизации
-
-.LoginFormAuthenticator
-[source,php]
---
-include::{app_dir}/src/Security/LoginFormAuthenticator.php[lines=93..94]
-...
-include::{app_dir}/src/Security/LoginFormAuthenticator.php[lines=99]
---
-
 == Создать фикстуру с админом
 
 [source,bash]
@@ -169,4 +133,11 @@ include::{app_dir}/src/DataFixtures/UserFixtures.php[lines=19..29]
 [source,bash]
 --
 php bin/console doctrine:fixtures:load --append --group=UserFixtures
+--
+
+== Сгенерировать ssl ключи для JWT
+
+[source,bash]
+--
+make make_ssl_keys
 --

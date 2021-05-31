@@ -154,3 +154,5 @@ make make_ssl_keys
 
 Вывести кнопку Authorize
 
+Добавить заголовок / описание в swagger
+

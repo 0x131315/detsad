@@ -1,4 +1,9 @@
+# https://api-platform.com/docs/core/configuration/
 api_platform:
+    title: 'API системы учета детей для детских садов'
+    description: 'API обеспечивает основной функционал по учету детей: JWT-авторизацию, внесение информации о наличии
+     детей, генерацию списков и отчетов'
+    version: '1.0.1'
     mapping:
         paths: ['%kernel.project_dir%/src/Entity']
     patch_formats:

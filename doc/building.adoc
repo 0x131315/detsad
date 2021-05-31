@@ -156,3 +156,6 @@ make make_ssl_keys
 
 Добавить заголовок / описание в swagger
 
+== Настроить Token refresh
+Инструкция https://github.com/markitosgv/JWTRefreshTokenBundle
+

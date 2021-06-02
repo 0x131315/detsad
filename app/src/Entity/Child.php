@@ -40,7 +40,7 @@ class Child
     private $kind_group;
 
     /**
-     * @ORM\Column(type="string", length=255, columnDefinition="ENUM('male', 'female')")
+     * @ORM\Column(type="enum_gender")
      */
     private $gender;
 

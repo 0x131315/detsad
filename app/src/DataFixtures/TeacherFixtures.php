@@ -24,7 +24,7 @@ class TeacherFixtures extends Fixture implements DependentFixtureInterface
         $groups = $manager->getRepository(KindGroup::class)->findAll();
         $teacherCount = 0;
         foreach ($groups as $group) {
-            $totalTeachers = $faker->numberBetween(1, 2);
+            $totalTeachers = 2;
             while ($totalTeachers-- > 0) {
                 $teacherCount++;
 

@@ -11,23 +11,34 @@ use Faker\Factory;
 
 class ChildFixtures extends Fixture implements DependentFixtureInterface
 {
+    protected \Faker\Generator $faker;
+
+    public function __construct()
+    {
+        $this->faker = Factory::create('ru_RU');
+    }
+
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create('ru_RU');
+        $faker = $this->faker;
         $groups = $manager->getRepository(KindGroup::class)->findAll();
         foreach ($groups as $group) {
-            $totalChilds = $faker->numberBetween(5, 20);
-            $groupGender = $faker->numberBetween(30, 70);
+            $totalChilds = $this->faker->numberBetween(5, 20);
+            $genderChance = $this->faker->numberBetween(30, 70);
             while ($totalChilds-- > 0) {
-                $child = new Child();
+                $child = $this->buildChild($genderChance);
                 $child->setKindGroup($group);
-                $child->setGender($faker->boolean($groupGender) ? 'male' : 'female');
-                $child->setFirstName($faker->firstName($child->getGender()));
-                $child->setLastName($faker->lastName($child->getGender()));
                 $child->setIsPresent($faker->optional(0.98)->boolean(95));
 
                 $manager->persist($child);
             }
+        }
+
+        $totalProblemChilds = $faker->numberBetween(1, 3);
+        $genderChance = $faker->numberBetween(30, 70);
+        while ($totalProblemChilds-- > 0) {
+            $child = $this->buildChild($genderChance);
+            $manager->persist($child);
         }
 
         $manager->flush();
@@ -41,5 +52,16 @@ class ChildFixtures extends Fixture implements DependentFixtureInterface
         return [
             GroupFixtures::class
         ];
+    }
+
+    protected function buildChild(int $genderChance,): Child
+    {
+        $faker = $this->faker;
+        $child = new Child();
+        $child->setGender($faker->boolean($genderChance) ? 'male' : 'female');
+        $child->setFirstName($faker->firstName($child->getGender()));
+        $child->setLastName($faker->lastName($child->getGender()));
+
+        return $child;
     }
 }

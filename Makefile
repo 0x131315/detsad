@@ -57,6 +57,16 @@ symfony_list_commands:
 	./php bin/console list
 symfony_cache_clear:
 	./php bin/console cache:clear
+symfony_entity_make:
+	./php bin/console make:entity
+symfony_migration_make:
+	./php bin/console make:migration
+symfony_migration_migrate:
+	./php bin/console doctrine:migrations:migrate
+symfony_fixtures_make:
+	./php bin/console make:fixtures
+symfony_fixtures_load:
+	./php bin/console doctrine:fixtures:load -n
 
 # git
 git_list_unmerged_branch:

@@ -19,10 +19,14 @@ class UserFixtures extends Fixture
         $faker = Factory::create('ru_RU');
         $totalUsers = $faker->numberBetween(10, 100);
 
-        $manager->persist($this->buildUser('admin@admin.com', 'admin', 'ROLE_ADMIN'));
+        $manager->persist($this->buildUser('admin@example.org', 'admin', 'ROLE_ADMIN'));
+        $counter = [];
         while ($totalUsers-- > 0) {
-            $email = $faker->unique()->safeEmail();
             $role = $faker->optional(0.1, 'ROLE_TEACHER')->passthrough('ROLE_MANAGER');
+            $simpleRole = explode('_', strtolower($role))[1];
+            if (!array_key_exists($simpleRole, $counter)) $counter[$simpleRole] = 0;
+            $counter[$simpleRole]++;
+            $email = $simpleRole . $counter[$simpleRole] . '@example.org';
             $manager->persist($this->buildUser($email, 'user', $role));
         }
 

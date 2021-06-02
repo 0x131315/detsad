@@ -39,6 +39,11 @@ class User implements UserInterface
      */
     private $teacher;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Manager::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $manager;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -138,6 +143,28 @@ class User implements UserInterface
         }
 
         $this->teacher = $teacher;
+
+        return $this;
+    }
+
+    public function getManager(): ?Manager
+    {
+        return $this->manager;
+    }
+
+    public function setManager(?Manager $manager): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($manager === null && $this->manager !== null) {
+            $this->manager->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($manager !== null && $manager->getUser() !== $this) {
+            $manager->setUser($this);
+        }
+
+        $this->manager = $manager;
 
         return $this;
     }

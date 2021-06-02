@@ -17,16 +17,6 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $manager->persist($this->buildUser('admin@example.org', 'admin', 'ROLE_ADMIN'));
-
-        $faker = Factory::create('ru_RU');
-        $count = 0;
-        $totalUsers = $faker->numberBetween(2, 5);
-        while ($totalUsers-- > 0) {
-            $count++;
-            $email = 'manager' . $count . '@example.org';
-            $manager->persist($this->buildUser($email, 'user', 'ROLE_MANAGER'));
-        }
-
         $manager->flush();
     }
 

@@ -5,7 +5,7 @@ LABEL autodelete="true"
 RUN docker-php-ext-install pdo_mysql opcache
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN chmod +x /usr/local/bin/install-php-extensions && sync
-RUN install-php-extensions xdebug
+RUN install-php-extensions gd xdebug
 
 FROM build
 COPY . .

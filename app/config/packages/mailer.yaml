@@ -2,4 +2,4 @@ framework:
     mailer:
         dsn: '%env(MAILER_DSN)%'
         envelope:
-            sender: 'kindergarten@example.org'
+            sender: '%env(EMAIL_FROM)%'

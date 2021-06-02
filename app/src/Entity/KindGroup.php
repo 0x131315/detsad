@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\GroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=GroupRepository::class)
  * @ORM\Table(name="`kind_group`")
  */
+#[ApiResource(collectionOperations: ['get'], itemOperations: ['get'])]
 class KindGroup
 {
     /**

@@ -34,6 +34,11 @@ class User implements UserInterface
      */
     private $password;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Teacher::class, mappedBy="user", cascade={"persist", "remove"})
+     */
+    private $teacher;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,5 +118,27 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    public function getTeacher(): ?Teacher
+    {
+        return $this->teacher;
+    }
+
+    public function setTeacher(?Teacher $teacher): self
+    {
+        // unset the owning side of the relation if necessary
+        if ($teacher === null && $this->teacher !== null) {
+            $this->teacher->setUser(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if ($teacher !== null && $teacher->getUser() !== $this) {
+            $teacher->setUser($this);
+        }
+
+        $this->teacher = $teacher;
+
+        return $this;
     }
 }

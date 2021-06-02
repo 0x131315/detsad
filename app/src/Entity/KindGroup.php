@@ -30,9 +30,15 @@ class KindGroup
      */
     private $children;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Teacher::class, mappedBy="kind_group")
+     */
+    private $teachers;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->teachers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,6 +82,36 @@ class KindGroup
             // set the owning side to null (unless already changed)
             if ($child->getKindGroup() === $this) {
                 $child->setKindGroup(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Teacher[]
+     */
+    public function getTeachers(): Collection
+    {
+        return $this->teachers;
+    }
+
+    public function addTeacher(Teacher $teacher): self
+    {
+        if (!$this->teachers->contains($teacher)) {
+            $this->teachers[] = $teacher;
+            $teacher->setKindGroup($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTeacher(Teacher $teacher): self
+    {
+        if ($this->teachers->removeElement($teacher)) {
+            // set the owning side to null (unless already changed)
+            if ($teacher->getKindGroup() === $this) {
+                $teacher->setKindGroup(null);
             }
         }
 

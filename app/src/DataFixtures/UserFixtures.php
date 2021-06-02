@@ -16,18 +16,15 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $faker = Factory::create('ru_RU');
-        $totalUsers = $faker->numberBetween(10, 100);
-
         $manager->persist($this->buildUser('admin@example.org', 'admin', 'ROLE_ADMIN'));
-        $counter = [];
+
+        $faker = Factory::create('ru_RU');
+        $count = 0;
+        $totalUsers = $faker->numberBetween(2, 5);
         while ($totalUsers-- > 0) {
-            $role = $faker->optional(0.1, 'ROLE_TEACHER')->passthrough('ROLE_MANAGER');
-            $simpleRole = explode('_', strtolower($role))[1];
-            if (!array_key_exists($simpleRole, $counter)) $counter[$simpleRole] = 0;
-            $counter[$simpleRole]++;
-            $email = $simpleRole . $counter[$simpleRole] . '@example.org';
-            $manager->persist($this->buildUser($email, 'user', $role));
+            $count++;
+            $email = 'manager' . $count . '@example.org';
+            $manager->persist($this->buildUser($email, 'user', 'ROLE_MANAGER'));
         }
 
         $manager->flush();

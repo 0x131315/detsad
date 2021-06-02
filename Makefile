@@ -59,10 +59,10 @@ symfony_clear_cache:
 	./php bin/console cache:clear
 symfony_make_entity:
 	./php bin/console make:entity
-symfony_make_migration:
-	./php bin/console make:migration
 symfony_make_fixtures:
 	./php bin/console make:fixtures
+symfony_make_migration:
+	./php bin/console make:migration
 symfony_migration_migrate:
 	./php bin/console doctrine:migrations:migrate -n
 symfony_migration_revert:

@@ -2,7 +2,6 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Child;
 use App\Entity\KindGroup;
 use App\Entity\Teacher;
 use App\Entity\User;

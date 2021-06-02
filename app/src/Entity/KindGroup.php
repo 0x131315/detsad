@@ -9,9 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=GroupRepository::class)
- * @ORM\Table(name="`group`")
+ * @ORM\Table(name="`kind_group`")
  */
-class Group
+class KindGroup
 {
     /**
      * @ORM\Id

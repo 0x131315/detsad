@@ -35,7 +35,7 @@ class Child
     private $is_present;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Group::class, inversedBy="children")
+     * @ORM\ManyToOne(targetEntity=KindGroup::class, inversedBy="children")
      */
     private $kind_group;
 
@@ -85,12 +85,12 @@ class Child
         return $this;
     }
 
-    public function getKindGroup(): ?Group
+    public function getKindGroup(): ?KindGroup
     {
         return $this->kind_group;
     }
 
-    public function setKindGroup(?Group $kind_group): self
+    public function setKindGroup(?KindGroup $kind_group): self
     {
         $this->kind_group = $kind_group;
 

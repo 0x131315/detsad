@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\KindGroup;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -17,7 +18,7 @@ class GroupFixtures extends Fixture
         $faker = Factory::create('ru_RU');
         $totalGroups = $faker->numberBetween(5, count(self::names));
         while ($totalGroups-- > 0) {
-            $group = new \App\Entity\Group();
+            $group = new KindGroup();
             $group->setName($faker->unique()->randomElement(self::names));
             $manager->persist($group);
         }

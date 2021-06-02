@@ -3,7 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Child;
-use App\Entity\Group;
+use App\Entity\KindGroup;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
@@ -14,7 +14,7 @@ class ChildFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $faker = Factory::create('ru_RU');
-        $groups = $manager->getRepository(Group::class)->findAll();
+        $groups = $manager->getRepository(KindGroup::class)->findAll();
         foreach ($groups as $group) {
             $totalChilds = $faker->numberBetween(5, 20);
             $groupGender = $faker->numberBetween(30, 70);

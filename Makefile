@@ -32,10 +32,10 @@ service_stop: ## stop services
 	docker-compose down
 service_restart: service_stop service_start ## restart services
 
-composer_install:
+composer_install: ## composer install
 	./composer install
 
-make_ssl_keys:
+make_ssl_keys: ## generate ssl keys
 	./make_ssl_key
 
 # info
@@ -53,21 +53,21 @@ service_stats: ## stat services
 service_clean: ## clean not used data
 	docker system prune -f
 
-symfony_list_commands:
+symfony_list_commands: ## list all commands
 	./php bin/console list
-symfony_clear_cache:
+symfony_clear_cache: ## clear cache
 	./php bin/console cache:clear
-symfony_make_entity:
+symfony_make_entity: ## new entity
 	./php bin/console make:entity
-symfony_make_fixtures:
+symfony_make_fixtures: ## new fixture
 	./php bin/console make:fixtures
-symfony_make_migration:
+symfony_make_migration: ## new migration
 	./php bin/console make:migration
-symfony_migration_migrate:
+symfony_migration_migrate: ## apply migrations
 	./php bin/console doctrine:migrations:migrate -n
-symfony_migration_revert:
+symfony_migration_revert: ## down last migration
 	./php bin/console doctrine:migrations:migrate prev -n
-symfony_load_fixtures:
+symfony_load_fixtures: ## load fixtures
 	./php bin/console doctrine:fixtures:load -n
 
 # git

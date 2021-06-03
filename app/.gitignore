@@ -24,3 +24,5 @@
 .phpunit.result.cache
 ###< phpunit/phpunit ###
 .env
+
+public/reports

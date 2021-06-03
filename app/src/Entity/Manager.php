@@ -9,7 +9,16 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=ManagerRepository::class)
  */
-#[ApiResource(collectionOperations: ['get'], itemOperations: ['get'])]
+#[ApiResource(
+    collectionOperations: [
+    'get' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+    'post' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+],
+    itemOperations: [
+        'get' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') or object.user == user"],
+        'patch' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+    ]
+)]
 class Manager
 {
     /**

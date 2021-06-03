@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -9,6 +10,16 @@ use Symfony\Component\Security\Core\User\UserInterface;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
+#[ApiResource(
+    collectionOperations: [
+    'get' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+    'post' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+],
+    itemOperations: [
+        'get' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') or object.user == user"],
+        'patch' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+    ]
+)]
 class User implements UserInterface
 {
     /**

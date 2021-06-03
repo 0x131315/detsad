@@ -12,7 +12,16 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=GroupRepository::class)
  * @ORM\Table(name="`kind_group`")
  */
-#[ApiResource(collectionOperations: ['get'], itemOperations: ['get'])]
+#[ApiResource(
+    collectionOperations: [
+    'get' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+    'post' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+],
+    itemOperations: [
+        'get' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') or is_granted('ROLE_TEACHER')"],
+        'patch' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+    ]
+)]
 class KindGroup
 {
     /**

@@ -76,3 +76,5 @@ symfony_custom_analyze: ## analyze data
 # git
 git_list_unmerged_branch:
 	@cd ../src && export TERM=xterm && git branch -r --no-merged
+
+init: service_start composer_install make_ssl_key symfony_migration_migrate symfony_load_fixtures

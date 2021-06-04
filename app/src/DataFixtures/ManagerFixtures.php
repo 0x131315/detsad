@@ -58,7 +58,7 @@ class ManagerFixtures extends Fixture implements DependentFixtureInterface
         return $user;
     }
 
-    protected function setPassword(User $user, string $password)
+    protected function setPassword(User $user, string $password): void
     {
         $encoded = $this->passwordEncoder->encodePassword($user, $password);
         $user->setPassword($encoded);

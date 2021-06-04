@@ -8,10 +8,11 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
+use Faker\Generator;
 
 class ChildFixtures extends Fixture implements DependentFixtureInterface
 {
-    protected \Faker\Generator $faker;
+    protected Generator $faker;
 
     public function __construct()
     {
@@ -54,7 +55,7 @@ class ChildFixtures extends Fixture implements DependentFixtureInterface
         ];
     }
 
-    protected function buildChild(int $genderChance,): Child
+    protected function buildChild(int $genderChance): Child
     {
         $faker = $this->faker;
         $child = new Child();

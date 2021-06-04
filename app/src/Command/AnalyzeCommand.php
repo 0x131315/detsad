@@ -150,7 +150,7 @@ class AnalyzeCommand extends Command
 
     protected function getEmailReport(array $groupedChilds, string $reportUrl): string
     {
-        list($totalChilds, $isPresentCount, $notPresentCount, $notCheckedCount, $notInGroupCount) = $this->getCounter($groupedChilds);
+        [$totalChilds, $isPresentCount, $notPresentCount, $notCheckedCount, $notInGroupCount] = $this->getCounter($groupedChilds);
 
         $text = 'Статистика:' . PHP_EOL;
         $text .= 'Всего детей: ' . $totalChilds . PHP_EOL;
@@ -174,13 +174,13 @@ class AnalyzeCommand extends Command
 
     protected function printReport(array $groupedChilds): void
     {
-        list($totalChilds, $isPresentCount, $notPresentCount, $notCheckedCount, $notInGroupCount) = $this->getCounter($groupedChilds);
+        [$totalChilds, $isPresentCount, $notPresentCount, $notCheckedCount, $notInGroupCount] = $this->getCounter($groupedChilds);
 
         $this->io->text('==============================');
         foreach (array_reverse(self::analyzeGroups) as $group) {
             if ($group === 'is_present') continue;
             foreach ($groupedChilds[$group] as $child) {
-                usleep(rand(50000, 500000));
+                usleep(mt_rand(50000, 500000));
                 $childInfo = $child->getLastName() . ' ' . $child->getFirstName();
                 if ($group !== 'not_group') $childInfo .= ', группа ' . $child->getKindGroup()->getName();
                 $status = self::groupStatus[$group];
@@ -240,10 +240,8 @@ class AnalyzeCommand extends Command
         $rootDir = $this->parameterBag->get('kernel.project_dir') . '/public';
         $reportDir = $rootDir . self::reportsDir;
 
-        if (!is_dir($reportDir)) {
-            if (!mkdir($reportDir) && !is_dir($reportDir)) {
-                throw new \RuntimeException(sprintf('Directory "%s" was not created', $reportDir));
-            }
+        if (!is_dir($reportDir) && !mkdir($reportDir) && !is_dir($reportDir)) {
+            throw new \RuntimeException(sprintf('Directory "%s" was not created', $reportDir));
         }
 
         return $reportDir;

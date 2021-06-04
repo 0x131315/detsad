@@ -7,6 +7,7 @@ use App\Repository\GroupRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use JetBrains\PhpStorm\Pure;
 
 /**
  * @ORM\Entity(repositoryClass=GroupRepository::class)
@@ -46,7 +47,7 @@ class KindGroup
      */
     private $teachers;
 
-    public function __construct()
+    #[Pure] public function __construct()
     {
         $this->children = new ArrayCollection();
         $this->teachers = new ArrayCollection();
@@ -89,11 +90,9 @@ class KindGroup
 
     public function removeChild(Child $child): self
     {
-        if ($this->children->removeElement($child)) {
-            // set the owning side to null (unless already changed)
-            if ($child->getKindGroup() === $this) {
-                $child->setKindGroup(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->children->removeElement($child) && $child->getKindGroup() === $this) {
+            $child->setKindGroup(null);
         }
 
         return $this;
@@ -119,11 +118,9 @@ class KindGroup
 
     public function removeTeacher(Teacher $teacher): self
     {
-        if ($this->teachers->removeElement($teacher)) {
-            // set the owning side to null (unless already changed)
-            if ($teacher->getKindGroup() === $this) {
-                $teacher->setKindGroup(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->teachers->removeElement($teacher) && $teacher->getKindGroup() === $this) {
+            $teacher->setKindGroup(null);
         }
 
         return $this;

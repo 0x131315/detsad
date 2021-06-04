@@ -24,7 +24,7 @@ class CustomClearStatusesCommand extends Command
     protected RouterInterface $router;
 
     /** @required */
-    public function setService(EntityManagerInterface $em, ParameterBagInterface $parameterBag, MailerInterface $mailer, RouterInterface $router)
+    public function setService(EntityManagerInterface $em, ParameterBagInterface $parameterBag, MailerInterface $mailer, RouterInterface $router): void
     {
         $this->em = $em;
         $this->parameterBag = $parameterBag;

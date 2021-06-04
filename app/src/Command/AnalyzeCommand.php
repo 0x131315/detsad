@@ -150,13 +150,7 @@ class AnalyzeCommand extends Command
 
     protected function getEmailReport(array $groupedChilds, string $reportUrl): string
     {
-        $totalChilds = array_reduce($groupedChilds, function ($carry, $childs) {
-            return $carry + count($childs);
-        }, 0);
-        $isPresentCount = count($groupedChilds['is_present']);
-        $notPresentCount = count($groupedChilds['not_present']);
-        $notCheckedCount = count($groupedChilds['not_checked']);
-        $notInGroupCount = count($groupedChilds['not_group']);
+        list($totalChilds, $isPresentCount, $notPresentCount, $notCheckedCount, $notInGroupCount) = $this->getCounter($groupedChilds);
 
         $text = 'Статистика:' . PHP_EOL;
         $text .= 'Всего детей: ' . $totalChilds . PHP_EOL;
@@ -180,13 +174,7 @@ class AnalyzeCommand extends Command
 
     protected function printReport(array $groupedChilds): void
     {
-        $totalChilds = array_reduce($groupedChilds, function ($carry, $childs) {
-            return $carry + count($childs);
-        }, 0);
-        $isPresentCount = count($groupedChilds['is_present']);
-        $notPresentCount = count($groupedChilds['not_present']);
-        $notCheckedCount = count($groupedChilds['not_checked']);
-        $notInGroupCount = count($groupedChilds['not_group']);
+        list($totalChilds, $isPresentCount, $notPresentCount, $notCheckedCount, $notInGroupCount) = $this->getCounter($groupedChilds);
 
         $this->io->text('==============================');
         foreach (array_reverse(self::analyzeGroups) as $group) {
@@ -272,5 +260,21 @@ class AnalyzeCommand extends Command
         $email->attachFromPath($attachFile);
 
         $this->mailer->send($email);
+    }
+
+    /**
+     * @param array $groupedChilds
+     * @return array
+     */
+    protected function getCounter(array $groupedChilds): array
+    {
+        $totalChilds = array_reduce($groupedChilds, function ($carry, $childs) {
+            return $carry + count($childs);
+        }, 0);
+        $isPresentCount = count($groupedChilds['is_present']);
+        $notPresentCount = count($groupedChilds['not_present']);
+        $notCheckedCount = count($groupedChilds['not_checked']);
+        $notInGroupCount = count($groupedChilds['not_group']);
+        return array($totalChilds, $isPresentCount, $notPresentCount, $notCheckedCount, $notInGroupCount);
     }
 }

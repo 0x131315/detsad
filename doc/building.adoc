@@ -97,6 +97,10 @@ composer req hautelook/alice-bundle --dev
 composer req symfony/http-client --dev
 composer req form
 composer req jwt-auth
+composer req gesdinet/jwt-refresh-token-bundle
+composer req phpoffice/phpspreadsheet
+composer req symfony/mailer
+composer req symfony/lock
 --
 
 == Прописать доступы к БД в .env
@@ -123,10 +127,10 @@ php bin/console doctrine:schema:create
 php bin/console make:fixtures
 --
 
-.UserFixtures
+.UserFixtures.php
 [source,php]
 --
-include::{app_dir}/src/DataFixtures/UserFixtures.php[lines=19..29]
+include::{app_dir}/src/DataFixtures/UserFixtures.php[lines=15..20]
 --
 
 == Применить фикстуру с админом
@@ -159,3 +163,4 @@ make make_ssl_keys
 == Настроить Token refresh
 Инструкция https://github.com/markitosgv/JWTRefreshTokenBundle
 
+== Дальше пишем приложение

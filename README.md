@@ -5,6 +5,7 @@
 * docker
 * docker compose
 * openssl
+* make
 
 ## Настройка
 

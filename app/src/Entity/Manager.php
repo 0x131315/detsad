@@ -39,7 +39,7 @@ class Manager
     private $last_name;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="manager", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      */
     private $user;
 

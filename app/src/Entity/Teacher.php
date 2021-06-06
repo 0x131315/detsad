@@ -44,7 +44,7 @@ class Teacher
     private $kind_group;
 
     /**
-     * @ORM\OneToOne(targetEntity=User::class, inversedBy="teacher", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity=User::class, cascade={"persist", "remove"})
      */
     private $user;
 

@@ -60,7 +60,9 @@ final class JwtDecorator implements OpenApiFactoryInterface
         ],
             summary: 'Get JWT token to login.',
             requestBody: new Model\RequestBody(
-            description: 'Generate new JWT Token',
+            description: 'Generate new JWT Token.
+            Users: manager1@example.org, teacher1@example.org, admin@example.org
+            Passwords: "admin" for admin, and "user" for other',
             content: new \ArrayObject([
             'application/json' => [
                 'schema' => [

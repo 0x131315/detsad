@@ -60,7 +60,7 @@ class AnalyzeCommand extends Command
             $this->io->text('The command is already running in another process.');
             return Command::SUCCESS;
         }
-        $this->time = (new \DateTime())->setDate(2021, 5, 29);
+        $this->time = new \DateTime();
         $reportDir = $this->getReportDir();
         $reportFileName = 'kind_report_' . $this->time->format('YmdHis') . '.xls';
         $reportFilePath = $reportDir . '/' . $reportFileName;

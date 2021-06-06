@@ -16,7 +16,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class CustomClearStatusesCommand extends Command
 {
-    protected static $defaultName = 'custom:clear:statuses';
+    protected static $defaultName = 'app:clear:statuses';
     protected static $defaultDescription = 'Очищает статусы детей';
     protected EntityManagerInterface $em;
     protected ParameterBagInterface $parameterBag;

@@ -30,7 +30,7 @@ class AnalyzeCommand extends Command
     protected const reportsDir = '/reports';
     protected const analyzeGroups = ['not_group', 'not_checked', 'not_present', 'is_present',];
     protected const groupStatus = ['not_group' => 'Не назначен в группу', 'not_checked' => 'Не отмечен', 'not_present' => 'Отсутствует', 'is_present' => 'Присутствует',];
-    protected static $defaultName = 'custom:analyze';
+    protected static $defaultName = 'app:analyze';
     protected static $defaultDescription = 'Анализ данных, подготовка и отправка отчета о списочном составе';
     protected EntityManagerInterface $em;
     protected ParameterBagInterface $parameterBag;

@@ -70,8 +70,10 @@ symfony_migration_revert: ## down last migration
 symfony_load_fixtures: ## load fixtures
 	./php bin/console doctrine:fixtures:load -n
 
-symfony_custom_analyze: ## analyze data
-	./php bin/console custom:analyze
+app_analyze: ## analyze data
+	./php bin/console app:analyze
+app_analyze: ## clear statuses
+	./php bin/console app:clear:statuses
 
 # git
 git_list_unmerged_branch:

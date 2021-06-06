@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Core\Annotation\ApiProperty;
 use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
@@ -44,16 +45,6 @@ class User implements UserInterface
      * @ORM\Column(type="string")
      */
     private $password;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Teacher::class, mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $teacher;
-
-    /**
-     * @ORM\OneToOne(targetEntity=Manager::class, mappedBy="user", cascade={"persist", "remove"})
-     */
-    private $manager;
 
     public function getId(): ?int
     {
@@ -134,49 +125,5 @@ class User implements UserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    public function getTeacher(): ?Teacher
-    {
-        return $this->teacher;
-    }
-
-    public function setTeacher(?Teacher $teacher): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($teacher === null && $this->teacher !== null) {
-            $this->teacher->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($teacher !== null && $teacher->getUser() !== $this) {
-            $teacher->setUser($this);
-        }
-
-        $this->teacher = $teacher;
-
-        return $this;
-    }
-
-    public function getManager(): ?Manager
-    {
-        return $this->manager;
-    }
-
-    public function setManager(?Manager $manager): self
-    {
-        // unset the owning side of the relation if necessary
-        if ($manager === null && $this->manager !== null) {
-            $this->manager->setUser(null);
-        }
-
-        // set the owning side of the relation if necessary
-        if ($manager !== null && $manager->getUser() !== $this) {
-            $manager->setUser($this);
-        }
-
-        $this->manager = $manager;
-
-        return $this;
     }
 }

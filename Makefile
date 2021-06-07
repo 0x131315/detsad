@@ -72,7 +72,7 @@ symfony_load_fixtures: ## load fixtures
 
 app_analyze: ## analyze data
 	./php bin/console app:analyze
-app_analyze: ## clear statuses
+app_status_clear: ## clear statuses
 	./php bin/console app:clear:statuses
 
 # git

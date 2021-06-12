@@ -9,7 +9,16 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=PresenceHistoryRepository::class)
  */
-#[ApiResource]
+#[ApiResource(
+    collectionOperations: [
+    'get' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+    'post' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER')"],
+],
+    itemOperations: [
+        'get' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') or is_granted('ROLE_TEACHER')"],
+        'patch' => ['security' => "is_granted('ROLE_ADMIN') or is_granted('ROLE_MANAGER') or is_granted('ROLE_TEACHER')"],
+    ]
+)]
 class PresenceHistory
 {
     /**

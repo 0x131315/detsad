@@ -85,4 +85,14 @@ class PresenceHistory
 
         return $this;
     }
+
+    /**
+     * @ORM\PreFlush
+     */
+    public function setDateNow(): self
+    {
+        if (!$this->date) {
+            $this->date = new \DateTime();
+        }
+    }
 }

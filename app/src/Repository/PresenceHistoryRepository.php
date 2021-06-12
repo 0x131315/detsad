@@ -19,6 +19,23 @@ class PresenceHistoryRepository extends ServiceEntityRepository
         parent::__construct($registry, PresenceHistory::class);
     }
 
+    /**
+     * @param int $year
+     * @return PresenceHistory[]
+     */
+    public function findByYear(int $year)
+    {
+        $startDate = (new \DateTime())->setDate($year, 1, 1)->setTime(0, 0, 0);
+        $endDate = (new \DateTime())->setDate($year, 12, 31)->setTime(23, 59, 59);
+
+        return $this->createQueryBuilder('p')
+            ->andWhere('p.date BETWEEN :start AND :end')
+            ->setParameter('start', $startDate)
+            ->setParameter('end', $endDate)
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return PresenceHistory[] Returns an array of PresenceHistory objects
     //  */

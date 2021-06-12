@@ -74,6 +74,8 @@ app_analyze: ## analyze data
 	./php bin/console app:analyze
 app_status_clear: ## clear statuses
 	./php bin/console app:clear:statuses
+app_presence_report: ## generate yearly presence report
+	./php bin/console app:presence:report
 
 # git
 git_list_unmerged_branch:

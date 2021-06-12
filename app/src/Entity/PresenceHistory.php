@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=PresenceHistoryRepository::class)
  * @ORM\Table(uniqueConstraints={@ORM\UniqueConstraint(columns={"child_id","date"})})
+ * @ORM\HasLifecycleCallbacks
  */
 #[ApiResource(
     collectionOperations: [
@@ -94,5 +95,6 @@ class PresenceHistory
         if (!$this->date) {
             $this->date = new \DateTime();
         }
+        return $this;
     }
 }
